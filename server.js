@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const contactController = require('./controllers/contact');
 
 mongoose.connect('mongodb://127.0.0.1:27017/contact');
 
@@ -13,9 +14,14 @@ app.use(bodyParser.urlencoded({
 const port = process.env.PORT || 3000;
 const router = express.Router();
 
-router.get('/', function (req, res) {
-    res.send('Server is up and running');
-});
+router.route('/contacts')
+    .post(contactController.postContact)
+    .get(contactController.getAllContacts);
+
+router.route('/contacts/:contact_id')
+    .get(contactController.getContact)
+    .put(contactController.putContact)
+    .delete(contactController.deleteContact);
 
 app.use('/api', router);
 app.listen(port);
