@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const contactController = require('./controllers/contact');
+const userController = require('./controllers/user');
 
 mongoose.connect('mongodb://127.0.0.1:27017/contact');
 
@@ -23,6 +24,11 @@ router.route('/contacts/:contact_id')
     .get(contactController.getContact)
     .put(contactController.putContact)
     .delete(contactController.deleteContact);
+
+router.route('/users')
+    .post(userController.postUser)
+    .get(userController.getUsers);
+
 
 app.use('/api', router);
 app.listen(port);
