@@ -10,7 +10,7 @@ afterAll(async () => dbDisconnect());
 
 describe('Contact Model Test Suite', () => {
 
-    test('Validate saving a new contact', async () => {
+    test('validate saving a new contact', async () => {
         const testContact = new Contact(fixtures.testContact);
         const savedContact = await testContact.save();
 
@@ -36,7 +36,7 @@ describe('Contact Model Test Suite', () => {
 
 	test('should throw when no phone has been specified', async () => {
 		expect.assertions(4);
-        testContact = new Contact(fixtures.testContactPhoneEmpty);
+        const testContact = new Contact(fixtures.testContactPhoneEmpty);
 
         try {
             await testContact.save();
@@ -46,6 +46,31 @@ describe('Contact Model Test Suite', () => {
 			expect(error.errors['phone']).not.toBeNull();
 			expect(error.errors['phone']).toBeDefined();
             expect(error.errors['phone'].message).toEqual('At least one phone number should be given');
+        }
+    });
+
+	test('saving a contact with no address should work', async () => {
+        const testContact = new Contact(fixtures.testContactNoAddress);
+        const savedContact = await testContact.save();
+
+        expect(savedContact).not.toBeNull();
+		expect(savedContact.name).toEqual('John Smith');
+        expect(savedContact.address).toBeUndefined();
+    });
+    
+	test('should throw when the address is incomplete', async () => {
+		expect.assertions(4);
+        const testContact = new Contact(fixtures.testContactAddressIncomplete);
+
+        try {
+            await testContact.save();
+        }
+        catch(error) {
+            console.log(error);
+            expect(error.name).toEqual('ValidationError');
+			expect(error.errors['address.country']).not.toBeNull();
+			expect(error.errors['address.country']).toBeDefined();
+            expect(error.errors['address.country'].kind).toEqual('required');
         }
     });
 });

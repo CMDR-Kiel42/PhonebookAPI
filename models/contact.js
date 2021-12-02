@@ -8,6 +8,12 @@ const PhoneSchema = new mongoose.Schema({
     other: {type: String},
 });
 
+const AdressSchema = new mongoose.Schema({
+    street: { type: String, required: true },
+	postalCode: { type: String, required: true },
+	country: { type: String, required: true },
+});
+
 function phoneValidator(phone) {
     var ret = (phone && 
         (typeof phone.home != 'undefined' && phone.home.length > 1)     ||
@@ -29,11 +35,7 @@ var ContactSchema = new mongoose.Schema({
         }
     },
     email: { type: String },
-    address: { 
-        street: { type: String, required: true },
-        postalCode: { type: String, required: true },
-        country: { type: String, required: true },
-    },
+    address: {type: AdressSchema},
 	userId: { type: String, required: true }
 });
 

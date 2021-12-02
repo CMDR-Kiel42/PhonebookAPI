@@ -37,3 +37,25 @@ exports.testContactPhoneEmpty = {
     },
     userId: 'abc123'
 }
+
+exports.testContactNoAddress = {
+    name: 'John Smith',
+    email: 'j.smith@chalkb.com',
+    userId: 'abc123',
+    phone: {
+        home: '1234'
+    }
+}
+
+exports.testContactAddressIncomplete = {
+    name: 'John Smith',
+    email: 'j.smith@chalkb.com',
+    phone: {
+        home: '123456'
+    },
+    address: {
+        street: '3 circle street',
+        postalCode: '1234'
+    },
+    userId: 'abc123'
+}
