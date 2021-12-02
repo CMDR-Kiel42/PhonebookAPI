@@ -13,3 +13,24 @@ exports.testContact = {
         country: 'Belgium'
     }
 }
+
+exports.testContactPhoneUndefined = {
+    name: 'John Smith',
+    email: 'j.smith@chalkb.com',
+    address: {
+        street: '3 circle street',
+        postalCOde: '1234',
+        country: 'Belgium'
+    }
+}
+
+exports.testContactPhoneEmpty = {
+    name: 'John Smith',
+    email: 'j.smith@chalkb.com',
+    phone: {},
+    address: {
+        street: '3 circle street',
+        postalCOde: '1234',
+        country: 'Belgium'
+    }
+}
