@@ -20,13 +20,13 @@ const port = process.env.PORT || 3000;
 const router = express.Router();
 
 router.route('/contacts')
-    .post(contactController.postContact)
-    .get(contactController.getAllContacts);
+    .post(authController.isAuthenticated, contactController.postContact)
+    .get(authController.isAuthenticated, contactController.getAllContacts);
 
 router.route('/contacts/:contact_id')
-    .get(contactController.getContact)
-    .put(contactController.putContact)
-    .delete(contactController.deleteContact);
+    .get(authController.isAuthenticated, contactController.getContact)
+    .put(authController.isAuthenticated, contactController.putContact)
+    .delete(authController.isAuthenticated, contactController.deleteContact);
 
 router.route('/users')
     .post(userController.postUser)

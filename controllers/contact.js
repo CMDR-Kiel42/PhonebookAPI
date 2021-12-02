@@ -7,6 +7,7 @@ exports.postContact = function(req, res) {
     contact.phone = req.body.phone;
     contact.email = req.body.email;
     contact.address = req.body.address;
+    contact.userId = req.user._id;
 
     contact.save(function(err) {
         if (err)
@@ -17,7 +18,7 @@ exports.postContact = function(req, res) {
 };
 
 exports.getAllContacts = function(req, res) {
-    Contact.find( function(err, contacts) {
+    Contact.find( {userId: req.user._id}, function(err, contacts) {
         if (err)
             res.send(err);
         else
@@ -26,7 +27,7 @@ exports.getAllContacts = function(req, res) {
 };
 
 exports.getContact = function(req, res) {
-    Contact.find( function(err, contact) {
+    Contact.find( { userId: req.user._id, _id: req.params.contact_id }, function(err, contact) {
         if (err)
             res.send(err);
         else
@@ -35,7 +36,7 @@ exports.getContact = function(req, res) {
 };
 
 exports.putContact = function(req, res) {
-    Contact.updateOne( function(err, contact) {
+    Contact.updateOne( { userId: req.user._id, _id: req.params.contact_id }, function(err, contact) {
         if (err)
             res.send(err);
         else {
@@ -55,7 +56,7 @@ exports.putContact = function(req, res) {
 };
 
 exports.deleteContact = function(req, res) {
-    Contact.deleteOne( function(err) {
+    Contact.deleteOne( { userId: req.user._id, _id: req.params.contact_id }, function(err) {
         if (err)
             res.send(err);
         else

@@ -9,9 +9,10 @@ exports.testContact = {
     email: 'j.smith@chalkb.com',
     address: {
         street: '3 circle street',
-        postalCOde: '1234',
+        postalCode: '1234',
         country: 'Belgium'
-    }
+    },
+    userId: 'abc123'
 }
 
 exports.testContactPhoneUndefined = {
@@ -19,9 +20,10 @@ exports.testContactPhoneUndefined = {
     email: 'j.smith@chalkb.com',
     address: {
         street: '3 circle street',
-        postalCOde: '1234',
+        postalCode: '1234',
         country: 'Belgium'
-    }
+    },
+    userId: 'abc123'
 }
 
 exports.testContactPhoneEmpty = {
@@ -30,7 +32,8 @@ exports.testContactPhoneEmpty = {
     phone: {},
     address: {
         street: '3 circle street',
-        postalCOde: '1234',
+        postalCode: '1234',
         country: 'Belgium'
-    }
+    },
+    userId: 'abc123'
 }
