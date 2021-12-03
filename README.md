@@ -18,11 +18,52 @@ npm install
 ```
 This will put everything in place.
 
+## Schemas
+Data is sent and received in JSON format.
+User :
+```
+{
+  "username": "username", // required
+  "password": "password"  // required
+}
+```
+
+Contact :
+```
+{
+  "name": "name", // required
+  "email": "email"  ,
+  "phone" : {
+      "home": "0123456",    // At least one phone number must be given
+      "work": "0123456",
+      "mobile": "0123456",
+      "other": "0123456"
+  },
+  "address": {  // Optional, but all field must be filled if an address is given
+      "street": "3 circle street",
+      "postalCode": "1234",
+      "country": "Belgium"
+  },
+  "userId": "abc123fgh" // required
+}
+```
+
 ## Running
 Open a terminal inside the project folder and run:
 ```
 node server
 ```
+## Routes
+- /api/users
+    - POST : Create user. 
+    - GET : List all users
+- /api/contacts
+    - POST : Create contact with authenticated user
+    - GET : List all contacts belonging to authenticated user
+- /api/contacts/:contact_id
+    - GET : Returns contact with id 'contact_id'
+    - PUT : Update contact with id 'contact_id'
+    - DELETE : Delete contact with id 'contact_id'
 
 ## Unit tests
 mongodb-memory-server is used to avoid connecting to a real instance of MongoDB for unit tests.
